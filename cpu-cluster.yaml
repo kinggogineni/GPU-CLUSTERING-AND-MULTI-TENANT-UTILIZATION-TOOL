@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-cluster
+  labels:
+    app: cpu-cluster
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cpu-cluster
+  template:
+    metadata:
+      labels:
+        app: cpu-cluster
+    spec:
+      containers:
+      - name: cpu-cluster
+        image: ubuntu:latest
+        command: ["sh", "-c", "while true; do echo Hello from CPU Cluster!; sleep 5; done"]
+        resources:
+          requests:
+            cpu: "500m"       # Request 500 millicores
+            memory: "256Mi"   # Request 256 MiB of memory
+          limits:
+            cpu: "1000m"      # Limit to 1 core
+            memory: "512Mi"   # Limit to 512 MiB
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cpu-cluster-service
+spec:
+  selector:
+    app: cpu-cluster
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: NodePort

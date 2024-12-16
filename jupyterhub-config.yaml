@@ -1,0 +1,64 @@
+hub:
+  config:
+    Spawner:
+      cpu_limit: 1
+      mem_limit: '4G'
+    JupyterHub:
+      auth:
+        type: dummy
+        dummy:
+          password: 'set-a-secure-password'
+
+  extraConfig:
+    proxy:
+      secretToken: "generate-a-secret-token-here"
+
+singleuser:
+  extraResource:
+    guarantees:
+      cpu: "1"
+      memory: 4Gi
+    limits:
+      cpu: "1"
+      memory: 4Gi
+      nvidia.com/gpu: "0"
+  profileList:
+    - display_name: "Small Instance"
+      description: "Minimum resources for light workloads"
+      kubespawner_override:
+        cpu_guarantee: 1
+        cpu_limit: 1
+        mem_guarantee: "4G"
+    - display_name: "GPU Instance"
+      description: "Instance with GPU"
+      kubespawner_override:
+        cpu_guarantee: 1
+        cpu_limit: 1
+        mem_guarantee: "4G"
+        mem_limit: "4G"
+        extra_resource_limits:
+          nvidia.com/gpu: "0"
+
+proxy:
+  secretToken: "generate-a-secret-token-here"
+
+scheduling:
+  userScheduler:
+    enabled: true
+  podPriority:
+    enabled: true
+  userPlaceholder:
+    enabled: true
+    replicas: 2
+
+cull:
+  enabled: true
+  timeout: 3600
+  every: 300
+
+singleuser:
+  storage:
+    type: dynamic
+    dynamic:
+      storageClass: local-storage
+    capacity: 4Gi

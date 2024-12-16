@@ -1,0 +1,18 @@
+proxy:
+  secretToken: "a-very-secret-token"
+
+singleuser:
+  image:
+    name: jupyter/base-notebook
+    tag: latest
+  cpu:
+    limit: 1
+    guarantee: 0.5
+  memory:
+    limit: 1Gi
+    guarantee: 512Mi
+hub:
+  config:
+    JupyterHub:
+      admin_users:
+        - chandu
