@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gpu-cluster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gpu-cluster
+  template:
+    metadata:
+      labels:
+        app: gpu-cluster
+    spec:
+      containers:
+      - name: gpu-cluster
+        image: <your-gpu-cluster-image>
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+          requests:
+            cpu: "500m"
+            memory: "512Mi"

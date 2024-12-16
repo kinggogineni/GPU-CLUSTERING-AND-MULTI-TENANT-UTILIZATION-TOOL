@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h2>Welcome, {{ username }}</h2>
+    <p>Scale the NGINX deployment:</p>
+    <form method="POST" action="/scale">
+        <label for="replicas">Number of replicas:</label>
+        <input type="number" id="replicas" name="replicas" min="1" required>
+        <input type="submit" value="Scale">
+    </form>
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+</html>

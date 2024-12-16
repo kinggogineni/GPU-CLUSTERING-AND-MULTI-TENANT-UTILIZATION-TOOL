@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jupyterhub
+  namespace: jupyterhub
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jupyterhub
+  template:
+    metadata:
+      labels:
+        app: jupyterhub
+    spec:
+      containers:
+      - name: jupyterhub
+        image: jupyterhub/jupyterhub:latest
+        ports:
+        - containerPort: 8000
+        volumeMounts:
+        - name: hub-db-dir
+          mountPath: /srv/jupyterhub
+        env:
+        - name: JUPYTERHUB_CRYPT_KEY
+          value: "a-very-secret-key"
+      volumes:
+      - name: hub-db-dir
+        emptyDir: {}
