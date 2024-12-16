@@ -27,6 +27,8 @@ This project, **Multi-Tenant GPU Cluster**, provides a comprehensive guide on se
 
 8. **Multi-Tenant GPU PPT file.pdf**  
    A PowerPoint presentation summarizing the project, methodology, and outcomes.
+9. **Config Files**
+   A collection of all the configuration files used in the project, including Kubernetes YAML files, NFS setup, JupyterHub configuration, and GPU cluster settings.
 
 ## Video Overview
 
